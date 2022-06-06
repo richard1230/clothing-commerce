@@ -12,12 +12,14 @@ const Shop = () => {
    return (
      <Routes>
        <Route path='/home' element={<Home />} >
-       <Route path='shop'  element={<Shop/>}/>
+         <Route path='shop' element={<Shop />} />
 
        </Route>
 
      </Routes>
   );
 }
+
+// 这里是嵌套路由的写法:shop前面没有/,配合Outlet,在页面上面显示为/home/shop
 
 export default App;
