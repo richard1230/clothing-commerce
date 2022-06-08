@@ -35,12 +35,6 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  console.log(userAuth);
-};
-
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
@@ -73,8 +67,6 @@ export const createUserDocumentFromAuth = async (userAuth,additionalInformation)
   }
   return userDocRef
 }
-
-
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
