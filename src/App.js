@@ -10,8 +10,8 @@ import Shop from './routes/shop/shop.component';
 
 
 function App() {
-  const { currentUser} = useContext(UserContext);
-
+  const { currentUser } = useContext(UserContext);
+  
   return (
     <Routes>
       <Route path='/' element={<Navigation />} >
