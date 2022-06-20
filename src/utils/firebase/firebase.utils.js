@@ -1,33 +1,25 @@
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
-  //GithubAuthProvider
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from 'firebase/auth';
-
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDVK6bHSwyZtT22MSC1FuxCbovoP20iMrQ",
-  authDomain: "crwn-clothing-db-b65c8.firebaseapp.com",
-  projectId: "crwn-clothing-db-b65c8",
-  storageBucket: "crwn-clothing-db-b65c8.appspot.com",
-  messagingSenderId: "462671489770",
-  appId: "1:462671489770:web:720ed73f9b4f0a0c360593"
+  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
+  authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
+  projectId: 'crwn-clothing-db-98d4d',
+  storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
+  messagingSenderId: '626766232035',
+  appId: '1:626766232035:web:506621582dab103a4d08d6',
 };
 
-// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -37,21 +29,21 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
-
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (
-                      userAuth,
-                      additionalInformation = {}
+  userAuth,
+  additionalInformation = {}
 ) => {
-
   if (!userAuth) return;
+
   const userDocRef = doc(db, 'users', userAuth.uid);
 
-  // console.log(userDocRef)
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -69,21 +61,23 @@ export const createUserDocumentFromAuth = async (
       console.log('error creating the user', error.message);
     }
   }
-  return userDocRef
-}
+
+  return userDocRef;
+};
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
-}
 
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signOutUser = async () => await signOut(auth);
-export const onAuthStateChangedListener = (callback) =>  //就是观察者
-  onAuthStateChanged(auth,callback)
 
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
